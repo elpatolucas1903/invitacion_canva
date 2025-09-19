@@ -134,28 +134,36 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, onSnapshot, query } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         
         // --- Configuración de Firebase ---
-        // Esta configuración utiliza las variables del entorno para conectarse automáticamente.
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = {
+          apiKey: "AIzaSyDt04rFMhCIwaoWQ36tSpuXDgs0zJeS6Y4",
+          authDomain: "canva-invitacion.firebaseapp.com",
+          projectId: "canva-invitacion",
+          storageBucket: "canva-invitacion.appspot.com",
+          messagingSenderId: "539238447922",
+          appId: "1:539238447922:web:594454602b4fd1c9dbb52b"
+        };
         
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         const auth = getAuth(app);
         
         // --- Autenticación ---
+        // ¡ACCIÓN REQUERIDA! Para que este código funcione, debes realizar DOS configuraciones
+        // en tu consola de Firebase para el proyecto "canva-invitacion":
+        // 1. Habilitar el "Acceso anónimo" como método de inicio de sesión:
+        //    Ve a: Authentication > Sign-in method > Anonymous (Habilitar).
+        //    Este es el motivo del error "auth/admin-restricted-operation".
+        // 2. Configurar las reglas de seguridad de Firestore (ver nota más abajo en la sección del formulario).
         onAuthStateChanged(auth, async (user) => {
             if (!user) {
                 try {
-                    if (typeof __initial_auth_token !== 'undefined') {
-                        await signInWithCustomToken(auth, __initial_auth_token);
-                    } else {
-                        await signInAnonymously(auth);
-                    }
+                    await signInAnonymously(auth);
                 } catch (error) {
                     console.error("Authentication failed:", error);
+                    document.getElementById('formMessage').textContent = "Error de autenticación. Revisa la configuración de Firebase.";
                 }
             }
         });
@@ -185,7 +193,19 @@
             }
 
             try {
-                const collectionPath = `artifacts/${appId}/public/data/clientes`;
+                // Se ha simplificado la ruta para un proyecto de Firebase independiente.
+                // ¡ACCIÓN REQUERIDA! En tu proyecto "canva-invitacion", debes configurar
+                // las reglas de seguridad de Firestore para permitir la escritura en "clientes".
+                // Ve a: Firestore Database > Rules y usa reglas como estas para empezar:
+                //
+                // service cloud.firestore {
+                //   match /databases/{database}/documents {
+                //     match /clientes/{docId} {
+                //       allow read, write: if request.auth != null;
+                //     }
+                //   }
+                // }
+                const collectionPath = `clientes`;
                 const clientsCollection = collection(db, collectionPath);
                 
                 await addDoc(clientsCollection, {
@@ -210,7 +230,7 @@
 
             } catch (error) {
                 console.error("Error al guardar en Firestore: ", error);
-                formMessage.textContent = 'Hubo un error al guardar tus datos.';
+                formMessage.textContent = 'Error al guardar. Revisa las reglas de Firestore.';
                 submitButton.disabled = false;
                 submitButton.textContent = 'Continuar por WhatsApp';
             }
@@ -221,9 +241,10 @@
             document.getElementById('mainContent').style.display = 'none';
             document.getElementById('adminSection').style.display = 'block';
             
-            const collectionPath = `artifacts/${appId}/public/data/clientes`;
+            // Se actualiza la ruta para que coincida con la del formulario
+            const collectionPath = `clientes`;
             const clientsCollection = collection(db, collectionPath);
-            const q = query(clientsCollection); // Puedes añadir orderBy si creas el índice en Firestore
+            const q = query(clientsCollection);
 
             onSnapshot(q, (querySnapshot) => {
                 const tableBody = document.getElementById('clientsTableBody');
@@ -258,9 +279,9 @@
                     `"${client.Correo}"`,
                     `"${client.Producto}"`,
                     client.Precio,
-                    `"${client.Estado}"`,
-                    `"${client.FechaActivacion}"`,
-                    `"${client.FechaExpiracion}"`,
+                    `"${client.Estado || ''}"`,
+                    `"${client.FechaActivacion || ''}"`,
+                    `"${client.FechaExpiracion || ''}"`,
                     `"${client.FechaRegistro}"`
                 ];
                 csvRows.push(values.join(','));
