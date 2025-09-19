@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canva Pro para Estudiantes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        #adminSection {
+            display: none; /* Oculto por defecto */
+        }
+        .table-auto th, .table-auto td {
+            border: 1px solid #e2e8f0;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-4xl" id="mainContent">
+        
+        <!-- Header -->
+        <header class="text-center mb-8 md:mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-purple-600">Accede a Canva Pro EDU</h1>
+            <p class="text-lg md:text-xl text-gray-600 mt-2">¡Desbloquea todo tu potencial creativo por solo S/8!</p>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+            
+            <!-- Form Section -->
+            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg">
+                <h2 class="text-2xl font-bold mb-4 text-center">¡Obtenlo ahora!</h2>
+                <p class="text-center text-gray-500 mb-6">Completa tus datos para recibir el enlace de activación.</p>
+                <form id="contactForm">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label for="firstName" class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+                            <input type="text" id="firstName" name="firstName" placeholder="Tu nombre" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-purple-500 focus:border-purple-500 transition">
+                        </div>
+                        <div>
+                            <label for="lastName" class="block text-sm font-medium text-gray-700 mb-1">Apellido</label>
+                            <input type="text" id="lastName" name="lastName" placeholder="Tu apellido" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-purple-500 focus:border-purple-500 transition">
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Correo Electrónico</label>
+                        <input type="email" id="email" name="email" placeholder="tu.correo@ejemplo.com" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-purple-500 focus:border-purple-500 transition">
+                    </div>
+                    <div class="mb-6">
+                        <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Número de Celular</label>
+                        <input type="tel" id="phone" name="phone" placeholder="987 654 321" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-purple-500 focus:border-purple-500 transition">
+                    </div>
+                    <button type="submit" id="submitButton" class="w-full bg-purple-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-transform transform hover:scale-105">
+                        Continuar por WhatsApp
+                    </button>
+                    <!-- Mensaje de error/éxito -->
+                    <p id="formMessage" class="text-center text-red-500 mt-4 text-sm h-4"></p>
+                </form>
+            </div>
+
+            <!-- Benefits Section -->
+            <div class="space-y-6">
+                 <h3 class="text-2xl font-bold text-center md:text-left text-gray-700 mb-4">Beneficios de Canva Pro EDU</h3>
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0 h-10 w-10 bg-purple-100 rounded-full flex items-center justify-center">
+                        <svg class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold">Más de 100 Millones de Recursos</h4>
+                        <p class="text-gray-600">Accede a fotos, videos, audios y elementos gráficos premium sin costo adicional.</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0 h-10 w-10 bg-purple-100 rounded-full flex items-center justify-center">
+                        <svg class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold">Herramientas IA y Mágicas</h4>
+                        <p class="text-gray-600">Utiliza el Quitafondos, la Edición Mágica y más herramientas con un solo clic.</p>
+                    </div>
+                </div>
+                 <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0 h-10 w-10 bg-purple-100 rounded-full flex items-center justify-center">
+                        <svg class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold">Más Almacenamiento</h4>
+                        <p class="text-gray-600">Guarda todos tus proyectos en la nube con 1TB de almacenamiento.</p>
+                    </div>
+                </div>
+                 <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0 h-10 w-10 bg-purple-100 rounded-full flex items-center justify-center">
+                        <svg class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold">Planificador de Contenido</h4>
+                        <p class="text-gray-600">Programa tus publicaciones para redes sociales directamente desde Canva.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Admin Section -->
+    <div id="adminSection" class="container mx-auto p-4 md:p-8">
+        <h2 class="text-3xl font-bold mb-6">Panel de Administración - Clientes</h2>
+        <button id="downloadCsvBtn" class="mb-6 bg-green-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-700">
+            Descargar como CSV
+        </button>
+        <div class="bg-white p-4 rounded-lg shadow-lg overflow-x-auto">
+            <table class="w-full table-auto" id="clientsTable">
+                <thead class="bg-gray-200">
+                    <tr>
+                        <th class="px-4 py-2">Nombre</th>
+                        <th class="px-4 py-2">WhatsApp</th>
+                        <th class="px-4 py-2">Correo</th>
+                        <th class="px-4 py-2">Producto</th>
+                        <th class="px-4 py-2">Precio</th>
+                        <th class="px-4 py-2">Fecha de Registro</th>
+                    </tr>
+                </thead>
+                <tbody id="clientsTableBody">
+                    <!-- Los datos de los clientes se insertarán aquí -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, onSnapshot, query } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        
+        // --- Configuración de Firebase ---
+        // Esta configuración utiliza las variables del entorno para conectarse automáticamente.
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+        
+        // --- Autenticación ---
+        onAuthStateChanged(auth, async (user) => {
+            if (!user) {
+                try {
+                    if (typeof __initial_auth_token !== 'undefined') {
+                        await signInWithCustomToken(auth, __initial_auth_token);
+                    } else {
+                        await signInAnonymously(auth);
+                    }
+                } catch (error) {
+                    console.error("Authentication failed:", error);
+                }
+            }
+        });
+
+        // --- Lógica del Formulario ---
+        const numeroWhatsApp = '51993886442'; 
+        const contactForm = document.getElementById('contactForm');
+        const formMessage = document.getElementById('formMessage');
+        const submitButton = document.getElementById('submitButton');
+
+        contactForm.addEventListener('submit', async function(event) {
+            event.preventDefault();
+            formMessage.textContent = '';
+            submitButton.disabled = true;
+            submitButton.textContent = 'Procesando...';
+
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const correo = document.getElementById('email').value;
+            const celular = document.getElementById('phone').value;
+
+            if ([firstName, lastName, correo, celular].some(field => field.trim() === '')) {
+                formMessage.textContent = 'Por favor, completa todos los campos.';
+                submitButton.disabled = false;
+                submitButton.textContent = 'Continuar por WhatsApp';
+                return;
+            }
+
+            try {
+                const collectionPath = `artifacts/${appId}/public/data/clientes`;
+                const clientsCollection = collection(db, collectionPath);
+                
+                await addDoc(clientsCollection, {
+                    Nombre: `${firstName.trim()} ${lastName.trim()}`,
+                    WhatsApp: celular.trim(),
+                    Correo: correo.trim(),
+                    Producto: "Canva Pro Edu",
+                    Precio: 8,
+                    Estado: "",
+                    FechaActivacion: "",
+                    FechaExpiracion: "",
+                    FechaRegistro: new Date().toISOString()
+                });
+
+                formMessage.textContent = '¡Datos guardados! Redirigiendo a WhatsApp...';
+                formMessage.classList.remove('text-red-500');
+                formMessage.classList.add('text-green-500');
+
+                // Redirigir a WhatsApp
+                const mensaje = encodeURIComponent('¡Hola! 👋✨ Quisiera obtener el enlace de Canva Pro por S/8, por favor. ¡Gracias! 🎉');
+                window.open(`https://wa.me/${numeroWhatsApp}?text=${mensaje}`, '_blank');
+
+            } catch (error) {
+                console.error("Error al guardar en Firestore: ", error);
+                formMessage.textContent = 'Hubo un error al guardar tus datos.';
+                submitButton.disabled = false;
+                submitButton.textContent = 'Continuar por WhatsApp';
+            }
+        });
+
+        // --- Lógica del Panel de Administración ---
+        function showAdminPanel() {
+            document.getElementById('mainContent').style.display = 'none';
+            document.getElementById('adminSection').style.display = 'block';
+            
+            const collectionPath = `artifacts/${appId}/public/data/clientes`;
+            const clientsCollection = collection(db, collectionPath);
+            const q = query(clientsCollection); // Puedes añadir orderBy si creas el índice en Firestore
+
+            onSnapshot(q, (querySnapshot) => {
+                const tableBody = document.getElementById('clientsTableBody');
+                tableBody.innerHTML = ''; // Limpiar tabla
+                let allClients = [];
+                querySnapshot.forEach((doc) => {
+                    const client = doc.data();
+                    allClients.push(client);
+                    const row = `<tr>
+                        <td class="px-4 py-2">${client.Nombre}</td>
+                        <td class="px-4 py-2">${client.WhatsApp}</td>
+                        <td class="px-4 py-2">${client.Correo}</td>
+                        <td class="px-4 py-2">${client.Producto}</td>
+                        <td class="px-4 py-2">${client.Precio}</td>
+                        <td class="px-4 py-2">${new Date(client.FechaRegistro).toLocaleString()}</td>
+                    </tr>`;
+                    tableBody.innerHTML += row;
+                });
+                // Preparar descarga CSV
+                document.getElementById('downloadCsvBtn').onclick = () => downloadCSV(allClients);
+            });
+        }
+
+        function downloadCSV(clients) {
+            const headers = "Nombre,WhatsApp,Correo,Producto,Precio,Estado,FechaActivacion,FechaExpiracion,FechaRegistro";
+            const csvRows = [headers];
+
+            clients.forEach(client => {
+                const values = [
+                    `"${client.Nombre}"`,
+                    `"${client.WhatsApp}"`,
+                    `"${client.Correo}"`,
+                    `"${client.Producto}"`,
+                    client.Precio,
+                    `"${client.Estado}"`,
+                    `"${client.FechaActivacion}"`,
+                    `"${client.FechaExpiracion}"`,
+                    `"${client.FechaRegistro}"`
+                ];
+                csvRows.push(values.join(','));
+            });
+
+            const csvString = csvRows.join('\n');
+            const blob = new Blob([csvString], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.setAttribute('hidden', '');
+            a.setAttribute('href', url);
+            a.setAttribute('download', `clientes_export_${new Date().toISOString().split('T')[0]}.csv`);
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        // Comprobar si se debe mostrar el panel de admin al cargar la página
+        window.onload = () => {
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('admin') === 'true') {
+                showAdminPanel();
+            }
+        };
+
+    </script>
+
+</body>
+</html>
+
